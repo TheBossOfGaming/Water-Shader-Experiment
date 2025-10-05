@@ -1,0 +1,65 @@
+[gd_scene load_steps=10 format=3 uid="uid://qw6a5xiwycp4"]
+
+[ext_resource type="Shader" uid="uid://dq8jcns670858" path="res://Shader/Water.gdshader" id="1_5v6ty"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_g6c1a"]
+subdivide_width = 200
+subdivide_depth = 200
+orientation = 1
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_5v6ty"]
+noise_type = 3
+fractal_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_aq4x0"]
+seamless = true
+as_normal_map = true
+bump_strength = 5.4
+noise = SubResource("FastNoiseLite_5v6ty")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_aq4x0"]
+seed = 10
+fractal_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_hjwib"]
+seamless = true
+as_normal_map = true
+bump_strength = 1.5
+noise = SubResource("FastNoiseLite_aq4x0")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_hjwib"]
+noise_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_x3r2l"]
+seamless = true
+noise = SubResource("FastNoiseLite_hjwib")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_aq4x0"]
+render_priority = 0
+shader = ExtResource("1_5v6ty")
+shader_parameter/albedo = Color(0.0294876, 0.266672, 1, 1)
+shader_parameter/albedo2 = Color(0, 0.607843, 0, 1)
+shader_parameter/metallic = 0.0
+shader_parameter/roughness = 0.02
+shader_parameter/wave = SubResource("NoiseTexture2D_x3r2l")
+shader_parameter/texture_normal = SubResource("NoiseTexture2D_aq4x0")
+shader_parameter/texture_normal2 = SubResource("NoiseTexture2D_hjwib")
+shader_parameter/wave_direction = Vector2(2, 0)
+shader_parameter/wave_direction2 = Vector2(0, 1)
+shader_parameter/time_scale = 0.005
+shader_parameter/noise_scale = 10.0
+shader_parameter/height_scale = 0.15
+shader_parameter/color_deep = Color(0, 0, 0.690196, 1)
+shader_parameter/color_shallow = Color(0.226395, 0.451442, 1, 1)
+shader_parameter/beers_law = 2.0
+shader_parameter/depth_offset = -0.75
+shader_parameter/edge_scale = 0.1
+shader_parameter/near = 1.0
+shader_parameter/far = 100.0
+shader_parameter/edge_color = Color(0, 0, 0, 1)
+
+[node name="MeshInstance3D" type="MeshInstance3D"]
+transform = Transform3D(32.75, 0, 0, 0, 0.657606, 0, 0, 0, 28.0501, 0.00195637, 0, -0.0310675)
+cast_shadow = 0
+mesh = SubResource("QuadMesh_g6c1a")
+surface_material_override/0 = SubResource("ShaderMaterial_aq4x0")

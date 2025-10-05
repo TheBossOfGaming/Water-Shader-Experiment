@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cnw5d0uuo0a3k"]
+
+[ext_resource type="PackedScene" uid="uid://qw6a5xiwycp4" path="res://Scenes/Water.tscn" id="1_5cjrv"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_5cjrv"]
+
+[node name="World" type="Node3D"]
+
+[node name="MeshInstance3D" parent="." instance=ExtResource("1_5cjrv")]
+transform = Transform3D(62.2365, 0, 0, 0, 1.24968, 0, 0, 0, 53.3051, 0.00195637, 0, -0.0310675)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.96806, 0, 0, 0, 5.15588, 0, 0, 0, 1.96806, -0.853135, -4.13383, -1.6254)
+mesh = SubResource("CylinderMesh_5cjrv")
